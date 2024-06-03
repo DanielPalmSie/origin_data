@@ -1,8 +1,4 @@
 
-# Project Setup
-
-To get started with this project, follow the instructions below:
-
 ## Running the Project
 
 1. Ensure you have Docker installed on your machine.
@@ -24,6 +20,15 @@ docker-compose up
 ## API Endpoints
 
 Below is a list of available API endpoints along with their descriptions:
+
+### Token Endpoint
+
+- **POST** `/api/v1/token`
+    - Description: Obtain a token for authentication.
+    - Form Data:
+        - `username`: User 0
+        - `password`: test
+    - Note: The returned token should be included in the headers of all subsequent requests.
 
 ### Company Endpoints
 
@@ -133,5 +138,11 @@ Below is a list of available API endpoints along with their descriptions:
         - `id` (integer): The ID of the employee to delete.
 
 ## Additional Information
+
+Before running the project, ensure to load the fixtures by running:
+
+```bash
+php bin/console doctrine:fixtures:load
+```
 
 Ensure that your environment meets all the necessary prerequisites and dependencies as defined in the project documentation. For any issues or questions, please refer to the project's issue tracker or contact the maintainer.
