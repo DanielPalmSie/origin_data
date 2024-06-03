@@ -12,12 +12,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    private UserPasswordHasherInterface $passwordHasher;
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->passwordHasher = $passwordHasher;
-    }
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
+    {}
 
     public function load(ObjectManager $manager)
     {
@@ -33,16 +29,15 @@ class AppFixtures extends Fixture
             ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'],
         ];
 
-        // Creating and persisting User entities
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setName('User ' . $i);
             $user->setEmail('user' . $i . '@example.com');
-            // Hash the password
-            $plaintextPassword = 'test'; // Replace 'test' with the chosen plain password
+
+            $plaintextPassword = 'test';
             $hashedPassword = $this->passwordHasher->hashPassword($user, $plaintextPassword);
             $user->setPassword($hashedPassword);
-            // Assign roles to the user. Here we cycle through the predefined roles array.
+
             $user->setRoles($roles[$i % count($roles)]);
 
             $manager->persist($user);

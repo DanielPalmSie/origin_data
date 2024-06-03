@@ -12,49 +12,4 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
-
-    /**
-     * Find users by email.
-     *
-     * @param string $email
-     * @return User[]
-     */
-    public function findByEmail(string $email): array
-    {
-        return $this->createQueryBuilder('u')
-            ->where('u.email = :email')
-            ->setParameter('email', $email)
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * Find users created after a certain date.
-     *
-     * @param \DateTimeInterface $date
-     * @return User[]
-     */
-    public function findCreatedAfter(\DateTimeInterface $date): array
-    {
-        return $this->createQueryBuilder('u')
-            ->where('u.createdAt > :date')
-            ->setParameter('date', $date)
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * Find users by name.
-     *
-     * @param string $name
-     * @return User[]
-     */
-    public function findByName(string $name): array
-    {
-        return $this->createQueryBuilder('u')
-            ->where('u.name LIKE :name')
-            ->setParameter('name', '%'.$name.'%')
-            ->getQuery()
-            ->getResult();
-    }
 }

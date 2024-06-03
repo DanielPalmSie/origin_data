@@ -18,8 +18,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 class JWTTokenAuthenticator extends AbstractAuthenticator
 {
     public function __construct(private readonly JWTEncoderInterface $jwtEncoder)
-    {
-    }
+    {}
 
     public function supports(Request $request): ?bool
     {

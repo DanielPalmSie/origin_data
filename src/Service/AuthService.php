@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Manager\UserManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AuthService
@@ -29,9 +28,6 @@ class AuthService
         return $this->passwordHasher->isPasswordValid($user, $password);
     }
 
-    /**
-     * @throws JWTEncodeFailureException
-     */
     public function getToken(string $login): string
     {
         $user = $this->userManager->findUserByLogin($login);

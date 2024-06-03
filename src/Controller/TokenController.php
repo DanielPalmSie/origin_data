@@ -13,8 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TokenController extends AbstractController
 {
     public function __construct(private readonly AuthService $authService)
-    {
-    }
+    {}
 
     #[Route(path: '', methods: ['POST'])]
     public function getTokenAction(Request $request): Response
